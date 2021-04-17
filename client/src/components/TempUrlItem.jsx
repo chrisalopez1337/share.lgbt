@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import ShareModal from './ShareModal.jsx';
 
 const Row = styled.div`
     display: flex;
@@ -43,7 +44,7 @@ const ButtonWrapper = styled.div`
 
 const CopyButton = styled.button`
     padding: 7px;
-    background-color: #af36f5;
+    background-color: ${props => props.close ? "#f53d7d" : "#af36f5" };
     border: transparent;
     color: whitesmoke;
     font-family: inherit;
@@ -54,8 +55,8 @@ const CopyButton = styled.button`
     transition-duration: 0.2s;
     font-weight: bold;
     &:hover {
-        color: #af36f5;
-        box-shadow: 0px 0px 15px 0px  #af36f5;
+        color: ${props => props.close ? "#f53d7d" : "#af36f5" };
+        box-shadow: 0px 0px 15px 0px ${props => props.close ? "#f53d7d" : "#af36f5" };
         background-color: whitesmoke;
     }
 `;
@@ -80,22 +81,29 @@ const RedirectLink = styled.h3`
 
 
 export default function TempUrlItem({ short_link, redirect_link, clicks, copyText }) {
+    const [shareRender, setShareRender] = useState(false);
     return (
-        <Row>
-            <Column>
-                <Header>Short Url:</Header>
-                <Link>{short_link}</Link>
-            </Column>
+        <>
+            <Row>
+                <Column>
+                    <Header>Short Url:</Header>
+                    <Link>{short_link}</Link>
+                </Column>
 
-            <RedirectWrapper>
-                <Header>Links To:</Header>
-                <RedirectLink>{redirect_link}</RedirectLink>
-            </RedirectWrapper>
+                <RedirectWrapper>
+                    <Header>Links To:</Header>
+                    <RedirectLink>{redirect_link}</RedirectLink>
+                </RedirectWrapper>
 
-            <ButtonWrapper>
-                <CopyButton onClick={() => copyText(short_link)}>Copy</CopyButton>
-                <CopyButton>Share</CopyButton>
-            </ButtonWrapper>
-        </Row>
+                <ButtonWrapper>
+                    <CopyButton onClick={() => copyText(short_link)}>Copy</CopyButton>
+                    { shareRender
+                        ? <CopyButton close onClick={() => setShareRender(false)}>Close</CopyButton>
+                        : <CopyButton onClick={() => setShareRender(true)}>Share</CopyButton>
+                    }
+                </ButtonWrapper>
+            </Row>
+            { shareRender ? <ShareModal url={short_link} display={shareRender} /> : null }
+        </>
     );
 }

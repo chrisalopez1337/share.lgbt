@@ -127,7 +127,7 @@ export default function Converter({ shortLink, handleShortLink, handleSubmit, re
                       )
                     : null
             }
-        { shareRender ? <ShareModal url={'localhost:1337/zfYfO'} display={shareRender} /> : null }
+        { shareRender ? <ShareModal url={shortLink} display={shareRender} /> : null }
         </Container>
     );
 }
