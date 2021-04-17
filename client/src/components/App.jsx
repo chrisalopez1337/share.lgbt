@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './Header.jsx';
 
 export default function App() {
     const [shortLink, setShortLink] = useState(null);
@@ -22,6 +23,7 @@ export default function App() {
     }
     return (
         <>
+            <Header />
             <h1>Get Link</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="redirect_link">Link to shorten</label>
