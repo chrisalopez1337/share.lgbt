@@ -12,12 +12,14 @@ const Container = styled.form`
     padding: 20px 50px 40px 50px;
     border-radius: 7px;
     box-shadow: 0px 0px 15px 0px #7830f2;
-    width: 500px;
+    width: 600px;
 `;
 
 
 const Title = styled.h1`
      font-size: 2.75em;
+     padding: 0;
+     margin: 25px 0px 0px 0px;
 `;
 
 const Input = styled.input`
@@ -28,7 +30,7 @@ const Input = styled.input`
    font-family: inherit;
    font-weight: 400;
    font-size: 17px;
-   width: 350px;
+   width: 400px;
    margin-bottom: 20px;
 `;
 
@@ -67,6 +69,20 @@ const Link = styled.h2`
     border-radius: 7px;
 `;
 
+const Info = styled.p`
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #7830f2;
+    color: #7830f2;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:hover {
+        color: #f53d7d;
+        text-decoration-color: #f53d7d;
+    }
+`;
+
 const CopyButton = styled.button`
     padding: 7px;
     background-color: #af36f5;
@@ -86,10 +102,11 @@ const CopyButton = styled.button`
     }
 `;
 
-export default function Converter({ shortLink, handleShortLink, handleSubmit, redirect_link }) {
+export default function Converter({ shortLink, handleShortLink, handleSubmit, redirect_link, copyText }) {
     return (
         <Container onSubmit={handleSubmit}>
             <Title>Shorten URL</Title>
+            <Info>50% of all revenue is donated to LGBTQ+ foundations. Learn more...</Info>
             <Row>
                 <Input type="text" name="redirect_url" value={redirect_link} onChange={handleShortLink} />
                 <SubmitButton>Shorten</SubmitButton>
@@ -99,8 +116,8 @@ export default function Converter({ shortLink, handleShortLink, handleSubmit, re
                     ? (
                         <Row>
                             <Link>{shortLink}</Link>
-                            <CopyButton>Copy</CopyButton>
-                            <CopyButton>Share</CopyButton>
+                            <CopyButton onClick={ (e) => { e.preventDefault(); copyText(shortLink);} }>Copy</CopyButton>
+                            <CopyButton onClick={ (e) => { e.preventDefault();} }>Share</CopyButton>
                         </Row>
                       )
                     : null

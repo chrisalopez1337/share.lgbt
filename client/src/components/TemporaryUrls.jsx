@@ -12,7 +12,7 @@ const Container = styled.div`
     padding: 20px 50px 40px 50px;
     border-radius: 7px;
     box-shadow: 0px 0px 20px 0px #3ae7f0;
-    width: 500px;
+    width: 600px;
 `;
 
 const Link = styled.p`
@@ -29,12 +29,13 @@ const Link = styled.p`
     }
 `;
 
-export default function TemporaryUrls({ savedLinks }) {
+export default function TemporaryUrls({ savedLinks, copyText }) {
     return (
         <Container>
             <h1>Your Recent URL's</h1>
             <Link>Create an account to store all url's and more!</Link>
-            { savedLinks.map(({ short_link, clicks, redirect_link }) => <TempUrlItem short_link={short_link} clicks={clicks} redirect_link={redirect_link} />)}
+            { savedLinks.length === 0 ? <h3>No Recent URL's shortened</h3> : null }
+            { savedLinks.map(({ short_link, clicks, redirect_link }) => <TempUrlItem copyText={copyText} short_link={short_link} clicks={clicks} redirect_link={redirect_link} />)}
         </Container>
     );
 }

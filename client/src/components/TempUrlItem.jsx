@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const Row = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: row;
-    border: 3px solid #3ae7f0;
+    border: 3px solid #f53d7d;
     border-radius: 7px;
-    min-width: 550px;
+    min-width: 575px;
     margin: 10px 10px 10px 10px;
     padding: 0px 10px 0px 10px;
     transition-duration: 0.2s;
@@ -24,6 +24,7 @@ const Column = styled.div`
     justify-content: flex-start;
     flex-direction: column;
     margin: 0px 10px 0px 10px;
+    min-width: 180px;
 `;
 
 const Link = styled.h2`
@@ -45,9 +46,9 @@ const RedirectLink = styled.h3`
 `;
 
 
-export default function TempUrlItem({ short_link, redirect_link, clicks }) {
+export default function TempUrlItem({ short_link, redirect_link, clicks, copyText }) {
     return (
-        <Row>
+        <Row onClick={() => copyText(short_link)}>
             <Column>
                 <Header>Short Url:</Header>
                 <Link>{short_link}</Link>

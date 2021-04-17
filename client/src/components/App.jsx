@@ -30,6 +30,10 @@ export default function App() {
         setRedirectLink(e.target.value);
     }
 
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+    }
+
     function handleLocalStorage(short_link, redirect_link, clicks) {
         const key = 'stored-urls';
         const packet = { short_link, redirect_link, clicks };
@@ -67,8 +71,8 @@ export default function App() {
     return (
         <Container>
             <Header />
-            <Converter shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
-            <TemporaryUrls savedLinks={savedLinks} />
+            <Converter copyText={copyText} shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
+            <TemporaryUrls savedLinks={savedLinks} copyText={copyText} />
         </Container>
     );
 };

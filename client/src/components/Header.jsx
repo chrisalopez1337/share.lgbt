@@ -121,7 +121,7 @@ export default function Header() {
             <NavWrapper>
                 <NavButton signup>Create Account</NavButton>
                 <NavButton login>Log In</NavButton>
-                <NavButton support>Donate</NavButton>
+                <NavButton support>Our Mission</NavButton>
             </NavWrapper>
         </Container>
     );
