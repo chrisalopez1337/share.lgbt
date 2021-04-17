@@ -18,6 +18,13 @@ const Container = styled.div`
 export default function App() {
     const [shortLink, setShortLink] = useState(null);
     const [redirect_link, setRedirectLink] = useState('');
+    const [savedLinks, setSavedLinks] = useState([]);
+
+    useEffect(() => {
+        const key = 'stored-urls';
+        const stored = getOne(key);
+        if (stored) { setSavedLinks(stored) }
+    }, []);
 
     function handleChange(e) {
         setRedirectLink(e.target.value);
@@ -29,14 +36,17 @@ export default function App() {
         let stored = getOne(key);
         if (!stored) {
             const newArr = [packet];
+            setSavedLinks(newArr);
             return setOne(key, newArr);
         } 
         if (stored.length < 5) {
             stored.unshift(packet);
+            setSavedLinks(stored);
             return setOne(key, stored);
         }
         stored.pop();
         stored.unshift(packet);
+        setSavedLinks(stored);
         return setOne(key, stored);
     }
 
@@ -58,7 +68,7 @@ export default function App() {
         <Container>
             <Header />
             <Converter shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
-            <TemporaryUrls />
+            <TemporaryUrls savedLinks={savedLinks} />
         </Container>
     );
 };

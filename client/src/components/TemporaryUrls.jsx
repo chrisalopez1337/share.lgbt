@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import TempUrlItem from './TempUrlItem.jsx';
 
 const Container = styled.div`
-    margin-top: 50px;
+    margin: 50px 0px 50px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border: 2px solid #353536;
+    border: 2px solid #3ae7f0;
     padding: 20px 50px 40px 50px;
     border-radius: 7px;
-    box-shadow: 0px 0px 15px 0px #353536;
+    box-shadow: 0px 0px 20px 0px #3ae7f0;
     width: 500px;
 `;
 
@@ -28,11 +29,12 @@ const Link = styled.p`
     }
 `;
 
-export default function TemporaryUrls() {
+export default function TemporaryUrls({ savedLinks }) {
     return (
         <Container>
-            <h1>Recent URL's</h1>
+            <h1>Your Recent URL's</h1>
             <Link>Create an account to store all url's and more!</Link>
+            { savedLinks.map(({ short_link, clicks, redirect_link }) => <TempUrlItem short_link={short_link} clicks={clicks} redirect_link={redirect_link} />)}
         </Container>
     );
 }
