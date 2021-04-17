@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import Header from './Header.jsx';
+
+const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`;
 
 export default function App() {
     const [shortLink, setShortLink] = useState(null);
@@ -22,7 +32,7 @@ export default function App() {
             .catch(console.log);
     }
     return (
-        <>
+        <Container>
             <Header />
             <h1>Get Link</h1>
             <form onSubmit={handleSubmit}>
@@ -31,6 +41,6 @@ export default function App() {
                 <button type="submit">get short link</button>
             </form>
             {shortLink ? <h1>{shortLink}</h1> : null }
-        </>
+        </Container>
     );
 };
