@@ -8,14 +8,13 @@ const Row = styled.div`
     flex-direction: row;
     border: 3px solid #f53d7d;
     border-radius: 7px;
-    min-width: 575px;
+    min-width: 600px;
     margin: 10px 10px 10px 10px;
     padding: 0px 10px 0px 10px;
     transition-duration: 0.2s;
     &:hover {
         box-shadow: 0px 0px 10px 0px #7830f2;
         border: 3px solid #7830f2;
-        cursor: pointer;
     }
 `;
 
@@ -25,6 +24,40 @@ const Column = styled.div`
     flex-direction: column;
     margin: 0px 10px 0px 10px;
     min-width: 180px;
+`;
+
+const RedirectWrapper = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0px 10px 0px 10px;
+    min-width: 300px;
+    max-width: 300px;
+`;
+
+const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+`;
+
+const CopyButton = styled.button`
+    padding: 7px;
+    background-color: #af36f5;
+    border: transparent;
+    color: whitesmoke;
+    font-family: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 7px;
+    margin: 5px 0px 5px 0px;
+    transition-duration: 0.2s;
+    font-weight: bold;
+    &:hover {
+        color: #af36f5;
+        box-shadow: 0px 0px 15px 0px  #af36f5;
+        background-color: whitesmoke;
+    }
 `;
 
 const Link = styled.h2`
@@ -48,17 +81,21 @@ const RedirectLink = styled.h3`
 
 export default function TempUrlItem({ short_link, redirect_link, clicks, copyText }) {
     return (
-        <Row onClick={() => copyText(short_link)}>
+        <Row>
             <Column>
                 <Header>Short Url:</Header>
                 <Link>{short_link}</Link>
             </Column>
 
-            <Column>
+            <RedirectWrapper>
                 <Header>Links To:</Header>
                 <RedirectLink>{redirect_link}</RedirectLink>
-            </Column>
+            </RedirectWrapper>
 
+            <ButtonWrapper>
+                <CopyButton onClick={() => copyText(short_link)}>Copy</CopyButton>
+                <CopyButton>Share</CopyButton>
+            </ButtonWrapper>
         </Row>
     );
 }
