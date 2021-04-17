@@ -47,15 +47,30 @@ module.exports = {
 
             const { short_link } = req.body;
             const data = await models.retrieveLink(short_link);
-            console.log(short_link, data)
 
-            if (!data) {
-                return res.status(400).send({ error: 'Request failed, there is no link associated with that short url.'});
-            }
+            if (!data) { return res.status(400).send({ error: 'Request failed, there is no link associated with that short url.' }) };
 
             res.status(200).send(data);
         } catch(err) {
-            throw new Error(err);
+            console.log(err);
+            res.sendStatus(500);
+        }
+    },
+
+    redirectAndUpdate: async (req, res) => {
+        try {
+            const { hash } = req.params;
+            const short_link = `share.lgbt/${hash}`;
+            const data = await models.retrieveLink(short_link);
+            
+            if (!data) { return res.status(400).send({ error: 'Request failed, there is no link associated with that short url.' }) };
+
+            const { redirect_link, clicks } = data;
+            await models.addClick(short_link, clicks);
+            res.redirect(redirect_link);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
         }
     }
 }

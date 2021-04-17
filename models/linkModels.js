@@ -17,5 +17,14 @@ module.exports = {
         } catch(err) {
             throw new Error(err);
         }
+    },
+
+    addClick: async (short_link, clicks) => {
+        try {
+            await Links.findOneAndUpdate({ short_link }, { clicks: clicks + 1 });
+            return;
+        } catch(err) {
+            throw new Error(err);
+        }
     }
 }
