@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import ShareModal from './ShareModal.jsx';
 
 const Container = styled.form`
     margin-top: 50px;
@@ -103,6 +104,7 @@ const CopyButton = styled.button`
 `;
 
 export default function Converter({ shortLink, handleShortLink, handleSubmit, redirect_link, copyText }) {
+    const [shareRender, setShareRender] = useState(false);
     return (
         <Container onSubmit={handleSubmit}>
             <Title>Shorten URL</Title>
@@ -117,11 +119,15 @@ export default function Converter({ shortLink, handleShortLink, handleSubmit, re
                         <Row>
                             <Link>{shortLink}</Link>
                             <CopyButton onClick={ (e) => { e.preventDefault(); copyText(shortLink);} }>Copy</CopyButton>
-                            <CopyButton onClick={ (e) => { e.preventDefault();} }>Share</CopyButton>
+                            { shareRender 
+                                ? <CopyButton onClick={ (e) => { e.preventDefault(); setShareRender(false) } }>Close Share</CopyButton>
+                                : <CopyButton onClick={ (e) => { e.preventDefault(); setShareRender(true); } }>Share</CopyButton>
+                            } 
                         </Row>
                       )
                     : null
             }
+        { shareRender ? <ShareModal url={'localhost:1337/zfYfO'} display={shareRender} /> : null }
         </Container>
     );
 }

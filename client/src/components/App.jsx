@@ -5,6 +5,7 @@ import { getOne, setOne, getAll } from 'local-js';
 import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
+import ShareModal from './ShareModal.jsx';
 
 const Container = styled.div`
     display: flex;
