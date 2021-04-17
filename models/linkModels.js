@@ -10,14 +10,12 @@ module.exports = {
         }
     },
 
-    retrieveLink: async (short_url) => {
+    retrieveLink: async (short_link) => {
         try {
-            const doc = await Links.find({ short_url });
+            const doc = await Links.find({ short_link });
             return doc[0];
         } catch(err) {
             throw new Error(err);
         }
     }
 }
-
-

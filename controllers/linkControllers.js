@@ -28,6 +28,7 @@ module.exports = {
             if (!req.body?.redirect_link || typeof req.body?.redirect_link !== 'string') {
                 return res.status(400).send({ error: 'Request requires a redirect_link<String> on the request body.'});
             }
+
             const { redirect_link } = req.body;
             const short_link = await makeShortLink();
             const doc = await models.createLink(redirect_link, short_link);
@@ -37,4 +38,24 @@ module.exports = {
             res.sendStatus(500);
         }
     },
+
+    retrieveLink: async (req, res) => {
+        try {
+            if (!req.body?.short_link || typeof req.body?.short_link !== 'string') {
+                return res.status(400).send({ error: 'Request requires a short_link<String> on the request body.'});
+            }
+
+            const { short_link } = req.body;
+            const data = await models.retrieveLink(short_link);
+            console.log(short_link, data)
+
+            if (!data) {
+                return res.status(400).send({ error: 'Request failed, there is no link associated with that short url.'});
+            }
+
+            res.status(200).send(data);
+        } catch(err) {
+            throw new Error(err);
+        }
+    }
 }
