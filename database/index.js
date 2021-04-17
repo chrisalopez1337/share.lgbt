@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/share.lgbt');
+mongoose.connect('mongodb://localhost/share-lgbt');
 
 const linkSchema = new mongoose.Schema({
     redirect_link: String,
