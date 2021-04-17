@@ -35,7 +35,7 @@ export default function App() {
     return (
         <Container>
             <Header />
-            <Converter />
+            <Converter shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
         </Container>
     );
 };
