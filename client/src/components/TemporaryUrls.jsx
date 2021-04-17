@@ -32,7 +32,7 @@ export default function TemporaryUrls() {
     return (
         <Container>
             <h1>Recent URL's</h1>
-            <Link>Create an account to store all urls and more!</Link>
+            <Link>Create an account to store all url's and more!</Link>
         </Container>
     );
 }
