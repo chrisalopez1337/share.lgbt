@@ -10,6 +10,13 @@ const GlobalStyle = createGlobalStyle`
         background-color: whitesmoke;
         color: #1c1c1c;
     }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
 `;
 
 ReactDOM.render(

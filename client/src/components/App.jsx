@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Header from './Header.jsx';
+import Converter from './Converter.jsx';
 
 const Container = styled.div`
     display: flex;
@@ -34,13 +35,7 @@ export default function App() {
     return (
         <Container>
             <Header />
-            <h1>Get Link</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="redirect_link">Link to shorten</label>
-                <input type="text" name="redirect_link" value={redirect_link} onChange={handleChange}/>
-                <button type="submit">get short link</button>
-            </form>
-            {shortLink ? <h1>{shortLink}</h1> : null }
+            <Converter />
         </Container>
     );
 };
