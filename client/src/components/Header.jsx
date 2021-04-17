@@ -5,12 +5,13 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
     padding: 0px 15px 0px 15px;
 `;
 
 
 const NavWrapper = styled.div`
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -82,12 +83,46 @@ const Title = styled.h2`
 `;
 
 
-
+const NavButton = styled.button`
+    margin: 0px 4px 0px 4px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color: whitesmoke;
+    background-color: ${props => props.signup ? "#7830f2" : props.login ? "#7830f2" : props.support ? "#f52c68" : "transparent" };
+    padding: 10px;
+    border-radius: 7px;
+    border: transparent; 
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:hover {
+        background-color: transparent;
+        color: black;
+        box-shadow: 0px 0px 25px 0px ${props => props.signup ? "#7830f2" : props.login ? "#7830f2" : props.support ? "#f52c68" : "transparent" };
+    }
+    @media (max-width: 500px) {
+        font-size: 16px;
+        padding: 9px;
+    }
+    @media (max-width: 350px) {
+        font-size: 14px;
+        padding: 8px;
+    }
+    @media (max-width: 330px) {
+        font-size: 12px;
+        padding: 7px;
+    }
+`;
 
 export default function Header() {
     return (
         <Container>
             <Title>share.lgbt</Title>         
+            <NavWrapper>
+                <NavButton signup>Create Account</NavButton>
+                <NavButton login>Log In</NavButton>
+                <NavButton support>Support Us</NavButton>
+            </NavWrapper>
         </Container>
     );
 }
