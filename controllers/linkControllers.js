@@ -22,6 +22,13 @@ const makeShortLink = async () => {
     }
 }
 
+const formatRedirectLink = (link) => {
+    if (link.indexOf('https://') === -1 && link.indexOf('http://') === -1) {
+        link = 'https://' + link;
+    }
+    return link;
+}
+
 module.exports = {
     createLink: async (req, res) => {
         try {
@@ -30,8 +37,9 @@ module.exports = {
             }
 
             const { redirect_link } = req.body;
+            const formattedLink = formatRedirectLink(redirect_link);
             const short_link = await makeShortLink();
-            const doc = await models.createLink(redirect_link, short_link);
+            const doc = await models.createLink(formattedLink, short_link);
             res.status(201).send(doc);
         } catch(err) {
             console.log(err);
