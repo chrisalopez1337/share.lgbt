@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Header from './Header.jsx';
 import Converter from './Converter.jsx';
+import TemporaryUrls from './TemporaryUrls.jsx';
 
 const Container = styled.div`
     display: flex;
@@ -36,6 +37,7 @@ export default function App() {
         <Container>
             <Header />
             <Converter shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
+            <TemporaryUrls />
         </Container>
     );
 };

@@ -12,6 +12,7 @@ const Container = styled.form`
     padding: 20px 50px 40px 50px;
     border-radius: 7px;
     box-shadow: 0px 0px 15px 0px #7830f2;
+    width: 500px;
 `;
 
 
