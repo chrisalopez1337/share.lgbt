@@ -77,12 +77,10 @@ const Title = styled.h2`
     @media (max-width: 275px) {
         font-size: 2em;
     }
+    &:hover{
+        animation: rainbow-text-simple-animation 1s ease-in forwards;
+    } 
 `;
-/* 
-&:hover{
-    animation: rainbow-text-simple-animation 1s ease-in forwards;
-} 
-*/
 
 
 const NavButton = styled.button`
@@ -116,12 +114,12 @@ const NavButton = styled.button`
     }
 `;
 
-export default function Header() {
+export default function Header({ setPage }) {
     return (
         <Container>
-            <Title>share.lgbt</Title>         
+            <Title onClick={() => setPage('home')}>share.lgbt</Title>         
             <NavWrapper>
-                <NavButton signup>Create Account</NavButton>
+                <NavButton signup onClick={() => setPage('signup')}>Create Account</NavButton>
                 <NavButton login>Log In</NavButton>
                 <NavButton support>Our Mission</NavButton>
             </NavWrapper>

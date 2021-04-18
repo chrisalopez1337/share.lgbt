@@ -6,6 +6,7 @@ import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
 import ShareModal from './ShareModal.jsx';
+import SignUp from './SignUp.jsx';
 
 const Container = styled.div`
     display: flex;
@@ -20,6 +21,7 @@ export default function App() {
     const [shortLink, setShortLink] = useState(null);
     const [redirect_link, setRedirectLink] = useState('');
     const [savedLinks, setSavedLinks] = useState([]);
+    const [page, setPage] = useState('signup'); 
 
     useEffect(() => {
         const key = 'stored-urls';
@@ -69,11 +71,25 @@ export default function App() {
             })
             .catch(console.log);
     }
+
+    const pageRender = page === 'home'
+        ? (
+            <>
+                <Converter copyText={copyText} shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
+                <TemporaryUrls savedLinks={savedLinks} copyText={copyText} />
+            </>
+          )
+        : page === 'signup'
+        ? (
+            <>
+               <SignUp /> 
+            </>
+          )
+        : null;
     return (
         <Container>
-            <Header />
-            <Converter copyText={copyText} shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
-            <TemporaryUrls savedLinks={savedLinks} copyText={copyText} />
+            <Header setPage={setPage} />
+            {pageRender}
         </Container>
     );
 };

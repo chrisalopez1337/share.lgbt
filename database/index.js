@@ -9,6 +9,14 @@ const linkSchema = new mongoose.Schema({
     // Also want to add traffic sources
 });
 
-const Links = mongoose.model('Links', linkSchema);
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    links: []
+});
 
-module.exports = { Links };
+const Links = mongoose.model('Links', linkSchema);
+const Users = mongoose.model('Users', userSchema);
+
+module.exports = { Links, Users };

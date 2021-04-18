@@ -58,7 +58,7 @@ const Container = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     flex-direction: row;
-    max-width: 300px;
+    max-width: 500px;
     padding: 10px;
     border: 2px solid #454545;
     border-radius: 10px;
