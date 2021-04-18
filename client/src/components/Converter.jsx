@@ -86,7 +86,7 @@ const Info = styled.p`
 
 const CopyButton = styled.button`
     padding: 7px;
-    background-color: #af36f5;
+    background-color: ${props => props.close ? "#f53d7d" : "#af36f5" };
     border: transparent;
     color: whitesmoke;
     font-family: inherit;
@@ -97,8 +97,8 @@ const CopyButton = styled.button`
     transition-duration: 0.2s;
     font-weight: bold;
     &:hover {
-        color: #af36f5;
-        box-shadow: 0px 0px 15px 0px  #af36f5;
+        color: ${props => props.close ? "#f53d7d" : "#af36f5" };
+        box-shadow: 0px 0px 15px 0px ${props => props.close ? "#f53d7d" : "#af36f5" };
         background-color: whitesmoke;
     }
 `;
@@ -120,7 +120,7 @@ export default function Converter({ shortLink, handleShortLink, handleSubmit, re
                             <Link>{shortLink}</Link>
                             <CopyButton onClick={ (e) => { e.preventDefault(); copyText(shortLink);} }>Copy</CopyButton>
                             { shareRender 
-                                ? <CopyButton onClick={ (e) => { e.preventDefault(); setShareRender(false) } }>Close Share</CopyButton>
+                                ? <CopyButton close onClick={ (e) => { e.preventDefault(); setShareRender(false) } }>Close Share</CopyButton>
                                 : <CopyButton onClick={ (e) => { e.preventDefault(); setShareRender(true); } }>Share</CopyButton>
                             } 
                         </Row>
