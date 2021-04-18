@@ -32,7 +32,7 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-    border: 1.5px solid #b3b4b5;
+    border: 1.5px solid #af36f5;
     border-radius: 4px;
     padding: 5px;
     background-color: transparent;
@@ -47,20 +47,22 @@ const Label = styled.label`
 `;
 
 const SubmitButton = styled.button`
-    border: 2px solid #1cd6cd;
-    color: #1cd6cd;
-    background-color: transparent;
-    border-radius: 7px;
-    padding: 5px;
+    padding: 7px;
+    background-color: #af36f5;
+    border: transparent;
+    color: whitesmoke;
+    font-family: inherit;
     font-size: 20px;
-    font-weight: bold;
     cursor: pointer;
+    border-radius: 7px;
+    margin: 5px 0px 5px 0px;
     transition-duration: 0.2s;
+    font-weight: bold;
     &:hover {
-        background-color: #1cd6cd;
-        color: whitesmoke;
+        color: #af36f5;
+        box-shadow: 0px 0px 15px 0px #af36f5;
+        background-color: whitesmoke;
     }
-    margin-top: 15px;
 `;
 
 const Message = styled.div`

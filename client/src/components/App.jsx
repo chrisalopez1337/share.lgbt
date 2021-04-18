@@ -22,7 +22,7 @@ export default function App() {
     const [shortLink, setShortLink] = useState(null);
     const [redirect_link, setRedirectLink] = useState('');
     const [savedLinks, setSavedLinks] = useState([]);
-    const [page, setPage] = useState('home'); 
+    const [page, setPage] = useState('signup'); 
     const [userData, setUserData] = useState(null);
 
     function logIn(data) {
