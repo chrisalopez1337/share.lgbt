@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { getOne, setOne, getAll } from 'local-js';
+import { getOne, setOne, deleteOne } from 'local-js';
 import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
 import ShareModal from './ShareModal.jsx';
 import SignUp from './SignUp.jsx';
+import LogIn from './LogIn.jsx';
 
 const Container = styled.div`
     display: flex;
@@ -21,7 +22,36 @@ export default function App() {
     const [shortLink, setShortLink] = useState(null);
     const [redirect_link, setRedirectLink] = useState('');
     const [savedLinks, setSavedLinks] = useState([]);
-    const [page, setPage] = useState('signup'); 
+    const [page, setPage] = useState('home'); 
+    const [userData, setUserData] = useState(null);
+
+    function logIn(data) {
+        setUserData(data);
+        const key = 'current-user';
+        setOne(key, data.username);
+        setPage('home');
+    }
+
+    function logOut() {
+        setUserData(null);
+        const key = 'current-user';
+        deleteOne(key);
+        setPage('home');
+    }
+
+    useEffect(() => {
+        const key = 'current-user';
+        const data = getOne(key);
+        if (data) {
+            axios.get(`/api/users/get/${data}`)
+                .then(({ data }) => {
+                    setUserData(data);
+                })
+                .catch(console.log);
+        } else {
+            setUserData(null);
+        }
+    }, []);
 
     useEffect(() => {
         const key = 'stored-urls';
@@ -82,13 +112,19 @@ export default function App() {
         : page === 'signup'
         ? (
             <>
-               <SignUp /> 
+               <SignUp setPage={setPage} /> 
+            </>
+          )
+        : page === 'login'
+        ? (
+            <>
+                <LogIn setPage={setPage} logIn={logIn} />
             </>
           )
         : null;
     return (
         <Container>
-            <Header setPage={setPage} />
+            <Header setPage={setPage} userData={userData} logOut={logOut} />
             {pageRender}
         </Container>
     );

@@ -114,13 +114,31 @@ const NavButton = styled.button`
     }
 `;
 
-export default function Header({ setPage }) {
+export default function Header({ setPage, logOut, userData }) {
+    const loggedOut = 
+        (
+            <>
+                <NavButton signup onClick={() => setPage('signup')}>Create Account</NavButton>
+                <NavButton login onClick={() => setPage('login')}>Log In</NavButton>
+            </>
+        );
+    const loggedIn = 
+        (
+            <>
+                <NavButton signup onClick={() => setPage('signup')}>Your Dashboard</NavButton>
+                <NavButton login onClick={() => logOut()}>Log Out</NavButton>
+            </>
+        );
+
+    const buttonRender = userData
+        ? loggedIn
+        : loggedOut;
+
     return (
         <Container>
             <Title onClick={() => setPage('home')}>share.lgbt</Title>         
             <NavWrapper>
-                <NavButton signup onClick={() => setPage('signup')}>Create Account</NavButton>
-                <NavButton login>Log In</NavButton>
+                {buttonRender}
                 <NavButton support>Our Mission</NavButton>
             </NavWrapper>
         </Container>

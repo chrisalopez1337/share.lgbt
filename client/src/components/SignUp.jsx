@@ -67,7 +67,7 @@ const Message = styled.div`
     max-width: 400px;
     margin-left: 15px;
 `;
-export default function SignUp() {
+export default function SignUp({ setPage }) {
          // Store form data;
     const [fields, setFields] = useState({ username: '', password: '', verifyPassword: '', email: '' });
     const { username, password, verifyPassword, email } = fields;
@@ -197,6 +197,7 @@ export default function SignUp() {
             .then(res => {
                 const message = `Thanks for signing up ${username}! Please log in :)`;
                 handleMessage('submitMessage', message);
+                setPage('login');
             })
             .catch(err => console.error(err));
     }
