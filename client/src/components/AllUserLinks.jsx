@@ -95,11 +95,28 @@ export default function AllUserLinks({ userData }) {
         generatePages();
     }, [allLinks]);
 
+    const [pagesToRender, setPagesToRender] = useState([]);
+    useEffect(() => {
+        setPagesToRender(pages.slice(0,5));
+    }, [pages]);
+
+    function movePages(forward = true) {
+        if (!forward && currentPage <= 5) { return };
+        if (forward) { 
+            setCurrentPage(pagesToRender[0] + 5);
+            handleLinksToSee(allLinks, currentPage);
+            return setPagesToRender(pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)); 
+        }
+
+    }
+
     return (
         <Container>
             <Title>All of your links</Title>
             <PageRow>
-                { pages.map(pageNumber => <PageButton selected={pageNumber === currentPage} onClick={() => handlePageClick(pageNumber)}>{pageNumber}</PageButton> )}
+                <button onClick={() => movePages(false)}>Last 5...</button>
+                { pagesToRender.map(pageNumber => <PageButton selected={pageNumber === currentPage} onClick={() => handlePageClick(pageNumber)}>{pageNumber}</PageButton> )}
+                <button onClick={() => movePages()}>Next 5...</button>
             </PageRow>
         { linksToUse.map(link => <UserLink data={link} />)}
         </Container>
