@@ -8,6 +8,7 @@ import TemporaryUrls from './TemporaryUrls.jsx';
 import ShareModal from './ShareModal.jsx';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
+import Dashboard from './Dashboard.jsx';
 
 const Container = styled.div`
     display: flex;
@@ -119,6 +120,12 @@ export default function App() {
         ? (
             <>
                 <LogIn setPage={setPage} logIn={logIn} />
+            </>
+          )
+        : page === 'dashboard'
+        ? (
+            <>
+                <Dashboard userData={userData} />
             </>
           )
         : null;

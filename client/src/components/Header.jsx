@@ -125,7 +125,7 @@ export default function Header({ setPage, logOut, userData }) {
     const loggedIn = 
         (
             <>
-                <NavButton signup onClick={() => setPage('signup')}>Your Dashboard</NavButton>
+                <NavButton signup onClick={() => setPage('dashboard')}>Your Dashboard</NavButton>
                 <NavButton login onClick={() => logOut()}>Log Out</NavButton>
             </>
         );
