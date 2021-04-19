@@ -10,10 +10,30 @@ export default function AllUserLinks({ userData }) {
         }
     }, [userData])    
 
+    const [linksToUse, setLinksToUse] = useState(allLinks);
+    const [index, setIndex] = useState(0);
+    function handleLinksToSee(array, startIndex = index, search = 20) {
+        const newArray = [];
+        let tracker = startIndex
+        for (let i = startIndex; i < (startIndex + search); i++ ) {
+            if (!array[i]) { break };
+            tracker++;
+            newArray.push(array[i]);
+        }
+        setLinksToUse(newArray);
+        setIndex((tracker - startIndex));
+    }
+    useEffect(() => {
+        handleLinksToSee(allLinks, 0, 10);
+    }, [allLinks]);
+
+    
+
+
     return (
         <>
             <h1>All of your links</h1>
-        { allLinks.map(link => <UserLink data={link} />)}
+        { linksToUse.map(link => <UserLink data={link} />)}
         </>
     );
 }
