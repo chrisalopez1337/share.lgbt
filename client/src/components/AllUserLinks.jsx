@@ -11,20 +11,19 @@ export default function AllUserLinks({ userData }) {
     }, [userData])    
 
     const [linksToUse, setLinksToUse] = useState(allLinks);
-    const [index, setIndex] = useState(0);
-    function handleLinksToSee(array, startIndex = index, search = 20) {
-        const newArray = [];
-        let tracker = startIndex
-        for (let i = startIndex; i < (startIndex + search); i++ ) {
-            if (!array[i]) { break };
-            tracker++;
+    function handleLinksToSee(array, page = 1) {
+        let newArray = [];
+        let maxIndex = (page * 10),
+            i = maxIndex - 10;
+        while (i < maxIndex) {
+            if (!array[i]) { break }
             newArray.push(array[i]);
+            i++;
         }
         setLinksToUse(newArray);
-        setIndex((tracker - startIndex));
     }
     useEffect(() => {
-        handleLinksToSee(allLinks, 0, 10);
+        handleLinksToSee(allLinks);
     }, [allLinks]);
 
     const [pages, setPages] = useState([]);
@@ -51,12 +50,14 @@ export default function AllUserLinks({ userData }) {
         generatePages();
     }, [allLinks]);
 
+    console.log(pages);
+    console.log(allLinks.length)
 
     return (
         <>
             <h1>All of your links</h1>
         { linksToUse.map(link => <UserLink data={link} />)}
-            { pages.map(pageNumber => <h1>{pageNumber}</h1> )}
+            { pages.map(pageNumber => <button onClick={() => handleLinksToSee(allLinks, pageNumber)}>{pageNumber}</button> )}
         </>
     );
 }
