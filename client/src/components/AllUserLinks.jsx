@@ -104,11 +104,15 @@ export default function AllUserLinks({ userData }) {
         if (!forward && currentPage <= 5) { return };
         if (forward) { 
             setCurrentPage(pagesToRender[0] + 5);
-            handleLinksToSee(allLinks, currentPage);
             return setPagesToRender(pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)); 
         }
-
+        setCurrentPage(pagesToRender[0]-5);
+        return setPagesToRender(pages.slice(pagesToRender[0] - 6, pagesToRender[0] - 1));
     }
+
+    useEffect(() => {
+        handleLinksToSee(allLinks, currentPage);
+    }, [currentPage])
 
     return (
         <Container>
