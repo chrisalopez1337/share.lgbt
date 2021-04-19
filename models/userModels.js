@@ -17,5 +17,14 @@ module.exports = {
         } catch(err) {
             throw new Error(err);
         }
+    },
+
+    addLinkToUser: async (query, newArr) => {
+        try {   
+            const data = await Users.findOneAndUpdate(query, { links: newArr }, { new: true });
+            return data;
+        } catch(err) {
+            throw new Error(err);
+        }
     }
 }

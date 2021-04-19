@@ -60,5 +60,19 @@ module.exports = {
             console.log(err);
             res.sendStatus(500);
         }
+    },
+
+    addLinkToUser: async (req, res) => {
+        try {
+            const { linkData, userData } = req.body;
+            const { links, username } = userData;
+            let newArray = links;
+            newArray.unshift(linkData);
+            const newUserData = await userModels.addLinkToUser({ username }, newArray);
+            res.status(200).send(newUserData);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
     }
 }

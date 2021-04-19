@@ -98,7 +98,16 @@ export default function App() {
                 hash = hash[1];
                 const testLink = `localhost:1337/${hash}`;
                 handleLocalStorage(short_link, redirect_link, clicks);
-                setShortLink(testLink);
+                if (userData) {
+                    axios.post('/api/users/update/add-link', { linkData: data, userData  })
+                        .then(({ data }) => {
+                            setUserData(data);
+                            setShortLink(testLink);
+                        })
+                        .catch(console.log);
+                } else {
+                    setShortLink(testLink);
+                }
             })
             .catch(console.log);
     }
@@ -125,7 +134,7 @@ export default function App() {
         : page === 'dashboard'
         ? (
             <>
-                <Dashboard userData={userData} />
+                <Dashboard userData={userData} copyText={copyText} shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
             </>
           )
         : null;

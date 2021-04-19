@@ -6,4 +6,6 @@ userRouter.post('/create', userControllers.createUser);
 userRouter.get('/get/:searchItem', userControllers.getUser);
 userRouter.post('/validate', userControllers.validateUser);
 
+userRouter.post('/update/add-link', userControllers.addLinkToUser);
+
 module.exports = userRouter;
