@@ -22,7 +22,7 @@ export default function App() {
     const [shortLink, setShortLink] = useState(null);
     const [redirect_link, setRedirectLink] = useState('');
     const [savedLinks, setSavedLinks] = useState([]);
-    const [page, setPage] = useState('signup'); 
+    const [page, setPage] = useState('home'); 
     const [userData, setUserData] = useState(null);
 
     function logIn(data) {
@@ -106,7 +106,7 @@ export default function App() {
         ? (
             <>
                 <Converter copyText={copyText} shortLink={shortLink} handleShortLink={handleChange} handleSubmit={handleSubmit} redirect_link={redirect_link}/>
-                <TemporaryUrls savedLinks={savedLinks} copyText={copyText} />
+                <TemporaryUrls savedLinks={savedLinks} copyText={copyText} userData={userData} setPage={setPage}/>
             </>
           )
         : page === 'signup'

@@ -55,7 +55,7 @@ const SubmitButton = styled.button`
     font-size: 20px;
     cursor: pointer;
     border-radius: 7px;
-    margin: 5px 0px 5px 0px;
+    margin: 10px 0px 5px 0px;
     transition-duration: 0.2s;
     font-weight: bold;
     &:hover {

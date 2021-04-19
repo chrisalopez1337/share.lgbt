@@ -29,11 +29,14 @@ const Link = styled.p`
     }
 `;
 
-export default function TemporaryUrls({ savedLinks, copyText }) {
+export default function TemporaryUrls({ savedLinks, copyText, userData, setPage }) {
+    const linkRender = userData
+        ? <Link onClick={() => setPage('dashboard')}>See all your saved URL's</Link>
+        : <Link onClick={() => setPage('signup')}>Create an account to store all url's and more!</Link>;
     return (
         <Container>
             <h1>Your Recent URL's</h1>
-            <Link>Create an account to store all url's and more!</Link>
+            {linkRender}
             { savedLinks.length === 0 ? <h3>No Recent URL's shortened</h3> : null }
             { savedLinks.map(({ short_link, clicks, redirect_link }) => <TempUrlItem copyText={copyText} short_link={short_link} clicks={clicks} redirect_link={redirect_link} />)}
         </Container>
