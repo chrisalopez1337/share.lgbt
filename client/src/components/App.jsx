@@ -40,6 +40,14 @@ export default function App() {
         setPage('home');
     }
 
+    function getRecentUrls() {
+        if (!userData) return;
+        const lastFive = userData.links.slice(0,5);
+        const key = 'current-user';
+        setOne(key, lastFive);
+        setSavedLinks(lastFive);
+    }
+
     useEffect(() => {
         const key = 'current-user';
         const data = getOne(key);
@@ -51,10 +59,14 @@ export default function App() {
                 })
                 .catch(console.log);
         } else {
-            setPage('home');
             setUserData(null);
         }
     }, []);
+
+    useEffect(() => {
+        getRecentUrls();
+
+    }, [userData]);
 
     useEffect(() => {
         const key = 'stored-urls';
