@@ -27,13 +27,36 @@ export default function AllUserLinks({ userData }) {
         handleLinksToSee(allLinks, 0, 10);
     }, [allLinks]);
 
-    
+    const [pages, setPages] = useState([]);
+    function generatePages() {
+        let pages = [];
+        let count = 0,
+            page = 1,
+            i = 0;
+        while (i < allLinks.length) {
+            count++;
+            i++;
+            if (count === 10) {
+                pages.push(page);
+                page++;
+                count = 0;
+            }
+        }
+        if (count > 0) {
+            pages.push(page);
+        }
+        setPages(pages);
+    }
+    useEffect(() => {
+        generatePages();
+    }, [allLinks]);
 
 
     return (
         <>
             <h1>All of your links</h1>
         { linksToUse.map(link => <UserLink data={link} />)}
+            { pages.map(pageNumber => <h1>{pageNumber}</h1> )}
         </>
     );
 }
