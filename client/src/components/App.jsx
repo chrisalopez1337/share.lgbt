@@ -43,7 +43,7 @@ export default function App() {
     function getRecentUrls() {
         if (!userData) return;
         const lastFive = userData.links.slice(0,5);
-        const key = 'current-user';
+        const key = 'stored-urls';
         setOne(key, lastFive);
         setSavedLinks(lastFive);
     }
