@@ -30,7 +30,7 @@ export default function App() {
         setUserData(data);
         const key = 'current-user';
         setOne(key, data.username);
-        setPage('home');
+        setPage('dashboard');
     }
 
     function logOut() {
@@ -47,9 +47,11 @@ export default function App() {
             axios.get(`/api/users/get/${data}`)
                 .then(({ data }) => {
                     setUserData(data);
+                    setPage('dashboard');
                 })
                 .catch(console.log);
         } else {
+            setPage('home');
             setUserData(null);
         }
     }, []);
