@@ -20,12 +20,14 @@ const PageRow = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: row;
+    margin-bottom: 25px;
 `;
 
 const Title = styled.h1`
 	text-decoration: underline;
 	text-decoration-color: #7830f2;
 	color: #7830f2;
+    margin-bottom: 25px;
 `;
 
 const PageButton = styled.button`

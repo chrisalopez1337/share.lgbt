@@ -17,6 +17,11 @@ const GlobalStyle = createGlobalStyle`
     button:focus {
         outline: none;
     }
+
+    h1,h2,h3,h4,h5,h6 {
+        padding: 0;
+        margin: 10px;
+    }
 `;
 
 ReactDOM.render(
