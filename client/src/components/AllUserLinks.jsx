@@ -65,6 +65,8 @@ export default function AllUserLinks({ userData }) {
     useEffect(() => {
         handleLinksToSee(allLinks);
     }, [allLinks]);
+    console.log('Vim is OP')
+    
 
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
