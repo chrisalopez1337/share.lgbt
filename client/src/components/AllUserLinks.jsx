@@ -20,14 +20,14 @@ const PageRow = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: row;
-    margin-bottom: 25px;
+	margin-bottom: 25px;
 `;
 
 const Title = styled.h1`
 	text-decoration: underline;
 	text-decoration-color: #7830f2;
 	color: #7830f2;
-    margin-bottom: 25px;
+	margin-bottom: 25px;
 `;
 
 const PageButton = styled.button`
@@ -49,12 +49,12 @@ const MovementButton = styled.button`
 	margin: 0px 5px 0px 5px;
 	padding: 5px 10px 5px 10px;
 	background-color: ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
-    border: 2px solid ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
-    &:hover {
-        cursor: ${(props) => (props.active ? 'pointer' : 'inherit')};
-        box-shadow: 0px 0px 15px 0px 
-            ${(props) => (props.active ? '#a3a3a3' : 'transparent')};
-    }
+	border: 2px solid ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
+	&:hover {
+		cursor: ${(props) => (props.active ? 'pointer' : 'inherit')};
+		box-shadow: 0px 0px 15px 0px
+			${(props) => (props.active ? '#a3a3a3' : 'transparent')};
+	}
 	font-family: inherit;
 	color: whitesmoke;
 	border-radius: 100px;
@@ -62,7 +62,7 @@ const MovementButton = styled.button`
 	font-weight: bold;
 `;
 
-export default function AllUserLinks({userData}) {
+export default function AllUserLinks({userData, copyText}) {
 	const [allLinks, setAllLinks] = useState(userData.links || []);
 	useEffect(() => {
 		if (!userData?.links) {
@@ -156,7 +156,12 @@ export default function AllUserLinks({userData}) {
 		<Container>
 			<Title>All of your links</Title>
 			<PageRow>
-                <MovementButton active={pagesToRender[0] <= 5 ? false : true } onClick={() => movePages(false)}>Last 5...</MovementButton>
+				<MovementButton
+					active={!(pagesToRender[0] <= 5)}
+					onClick={() => movePages(false)}
+				>
+					Last 5...
+				</MovementButton>
 				{pagesToRender.map((pageNumber) => (
 					<PageButton
 						selected={pageNumber === currentPage}
@@ -165,10 +170,15 @@ export default function AllUserLinks({userData}) {
 						{pageNumber}
 					</PageButton>
 				))}
-                        <MovementButton active={pagesToRender.length < 5 ? false : true } onClick={() => movePages()}>Next 5...</MovementButton>
+				<MovementButton
+					active={!(pagesToRender.length < 5)}
+					onClick={() => movePages()}
+				>
+					Next 5...
+				</MovementButton>
 			</PageRow>
 			{linksToUse.map((link) => (
-				<UserLink data={link} />
+				<UserLink data={link} copyText={copyText} />
 			))}
 		</Container>
 	);

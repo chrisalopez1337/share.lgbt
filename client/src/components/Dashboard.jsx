@@ -11,7 +11,6 @@ export default function Dashboard({
 	handleShortLink,
 	handleSubmit
 }) {
-	console.log(userData);
 	return (
 		<>
 			<Converter
@@ -21,7 +20,7 @@ export default function Dashboard({
 				handleSubmit={handleSubmit}
 				redirect_link={redirect_link}
 			/>
-			<AllUserLinks userData={userData} />
+			<AllUserLinks userData={userData} copyText={copyText} />
 		</>
 	);
 }
