@@ -17,4 +17,5 @@ app.use('/api/links', linkRouter);
 app.use('/api/users', userRouter);
 app.get('/:hash', redirectAndUpdate);
 
+
 app.listen(PORT, () => console.log(`App listening @ localhost:${PORT}`));

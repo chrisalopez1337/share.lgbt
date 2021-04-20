@@ -131,23 +131,24 @@ export default function AllUserLinks({userData, copyText}) {
 		setPagesToRender(pages.slice(0, 5));
 	}, [pages]);
 
-	function movePages(forward = true) {
-		if (!forward && currentPage <= 5) {
-			return;
-		}
 
-		if (forward) {
-			setCurrentPage(pagesToRender[0] + 5);
+    function movePages(forward = true) {
+        if (!forward) {
+            if (currentPage <= 5) { return };
+            setCurrentPage(pagesToRender[0]-5);
+            return setPagesToRender(
+                pages.slice(pagesToRender[0] - 6, pagesToRender[0] -1 )
+            )
+        } else {
+            const index = pagesToRender[0] + 5;
+            console.log(pages[index])
+            if (!pages[pagesToRender[0] + 5]) { return };
+            setCurrentPage(pagesToRender[0] + 5);
 			return setPagesToRender(
 				pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)
 			);
-		}
-
-		setCurrentPage(pagesToRender[0] - 5);
-		return setPagesToRender(
-			pages.slice(pagesToRender[0] - 6, pagesToRender[0] - 1)
-		);
-	}
+        }
+    }
 
 	useEffect(() => {
 		handleLinksToSee(allLinks, currentPage);
@@ -160,7 +161,6 @@ export default function AllUserLinks({userData, copyText}) {
 				<MovementButton
 					active={!(pagesToRender[0] <= 5)}
 					onClick={() => movePages(false)}
-                    hidden={pagesToRender.length < 5}
 				>
 					Last 5...
 				</MovementButton>
@@ -175,7 +175,6 @@ export default function AllUserLinks({userData, copyText}) {
 				<MovementButton
 					active={!(pagesToRender.length < 5)}
 					onClick={() => movePages()}
-                    hidden={pagesToRender.length < 5}
 				>
 					Next 5...
 				</MovementButton>
