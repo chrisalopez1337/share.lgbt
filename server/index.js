@@ -6,10 +6,10 @@ const path = require('path');
 const linkRouter = require('./linkRoutes.js');
 const userRouter = require('./userRoutes.js');
 // Redirect controller
-const { redirectAndUpdate } = require('../controllers/linkControllers.js');
+const {redirectAndUpdate} = require('../controllers/linkControllers.js');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', express.static(path.join(__dirname, '../client/dist')));
 

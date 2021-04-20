@@ -1,130 +1,173 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import UserLink from './UserLink.jsx';
 
 const Container = styled.div`
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 2px solid #7830f2;
-    padding: 20px 50px 40px 50px;
-    border-radius: 7px;
-    box-shadow: 0px 0px 15px 0px #7830f2;
-    width: 600px;
+	margin-top: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	border: 2px solid #7830f2;
+	padding: 20px 50px 40px 50px;
+	border-radius: 7px;
+	box-shadow: 0px 0px 15px 0px #7830f2;
+	width: 600px;
 `;
 
 const PageRow = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
 `;
 
 const Title = styled.h1`
-    text-decoration: underline;
-    text-decoration-color: #7830f2;
-    color: #7830f2;
+	text-decoration: underline;
+	text-decoration-color: #7830f2;
+	color: #7830f2;
 `;
 
 const PageButton = styled.button`
-    margin: 0px 5px 0px 5px;
-    padding: 5px 10px 5px 10px;
-    background-color: ${props => props.selected ? "#f53d7d" : "#7830f2" };
-    border: 2px solid ${props => props.selected ? "#f53d7d" : "#7830f2" };
-    box-shadow: 0px 0px 15px 0px ${props => props.selected ? "#f53d7d" : "transparent" };
-    font-family: inherit;
-    color: whitesmoke;
-    border-radius: 100px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
+	margin: 0px 5px 0px 5px;
+	padding: 5px 10px 5px 10px;
+	background-color: ${(props) => (props.selected ? '#f53d7d' : '#7830f2')};
+	border: 2px solid ${(props) => (props.selected ? '#f53d7d' : '#7830f2')};
+	box-shadow: 0px 0px 15px 0px
+		${(props) => (props.selected ? '#f53d7d' : 'transparent')};
+	font-family: inherit;
+	color: whitesmoke;
+	border-radius: 100px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
 `;
 
-export default function AllUserLinks({ userData }) {
-    const [allLinks, setAllLinks] = useState(userData.links || []);
-    useEffect(() => {
-        if (!userData?.links) { return } else {
-            setAllLinks(userData.links);
-        }
-    }, [userData])    
-
-    const [linksToUse, setLinksToUse] = useState(allLinks);
-    function handleLinksToSee(array, page = 1) {
-        let newArray = [];
-        let maxIndex = (page * 10),
-            i = maxIndex - 10;
-        while (i < maxIndex) {
-            if (!array[i]) { break }
-            newArray.push(array[i]);
-            i++;
-        }
-        setLinksToUse(newArray);
+const MovementButton = styled.button`
+	margin: 0px 5px 0px 5px;
+	padding: 5px 10px 5px 10px;
+	background-color: ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
+    border: 2px solid ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
+    &:hover {
+        cursor: ${(props) => (props.active ? 'pointer' : 'inherit')};
+        box-shadow: 0px 0px 15px 0px 
+            ${(props) => (props.active ? '#a3a3a3' : 'transparent')};
     }
-    useEffect(() => {
-        handleLinksToSee(allLinks);
-    }, [allLinks]);
-    console.log('Vim is OP')
-    
+	font-family: inherit;
+	color: whitesmoke;
+	border-radius: 100px;
+	font-size: 20px;
+	font-weight: bold;
+`;
 
-    const [pages, setPages] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    function handlePageClick(pageNumber) {
-        handleLinksToSee(allLinks, pageNumber);
-        setCurrentPage(pageNumber);
-    }
-    function generatePages() {
-        let pages = [];
-        let count = 0,
-            page = 1,
-            i = 0;
-        while (i < allLinks.length) {
-            count++;
-            i++;
-            if (count === 10) {
-                pages.push(page);
-                page++;
-                count = 0;
-            }
-        }
-        if (count > 0) {
-            pages.push(page);
-        }
-        setPages(pages);
-    }
-    useEffect(() => {
-        generatePages();
-    }, [allLinks]);
+export default function AllUserLinks({userData}) {
+	const [allLinks, setAllLinks] = useState(userData.links || []);
+	useEffect(() => {
+		if (!userData?.links) {
+		} else {
+			setAllLinks(userData.links);
+		}
+	}, [userData]);
 
-    const [pagesToRender, setPagesToRender] = useState([]);
-    useEffect(() => {
-        setPagesToRender(pages.slice(0,5));
-    }, [pages]);
+	const [linksToUse, setLinksToUse] = useState(allLinks);
+	function handleLinksToSee(array, page = 1) {
+		const newArray = [];
+		const maxIndex = page * 10;
+		let i = maxIndex - 10;
+		while (i < maxIndex) {
+			if (!array[i]) {
+				break;
+			}
 
-    function movePages(forward = true) {
-        if (!forward && currentPage <= 5) { return };
-        if (forward) { 
-            setCurrentPage(pagesToRender[0] + 5);
-            return setPagesToRender(pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)); 
-        }
-        setCurrentPage(pagesToRender[0]-5);
-        return setPagesToRender(pages.slice(pagesToRender[0] - 6, pagesToRender[0] - 1));
-    }
+			newArray.push(array[i]);
+			i++;
+		}
 
-    useEffect(() => {
-        handleLinksToSee(allLinks, currentPage);
-    }, [currentPage])
+		setLinksToUse(newArray);
+	}
 
-    return (
-        <Container>
-            <Title>All of your links</Title>
-            <PageRow>
-                <button onClick={() => movePages(false)}>Last 5...</button>
-                { pagesToRender.map(pageNumber => <PageButton selected={pageNumber === currentPage} onClick={() => handlePageClick(pageNumber)}>{pageNumber}</PageButton> )}
-                <button onClick={() => movePages()}>Next 5...</button>
-            </PageRow>
-        { linksToUse.map(link => <UserLink data={link} />)}
-        </Container>
-    );
+	useEffect(() => {
+		handleLinksToSee(allLinks);
+	}, [allLinks]);
+
+	const [pages, setPages] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	function handlePageClick(pageNumber) {
+		handleLinksToSee(allLinks, pageNumber);
+		setCurrentPage(pageNumber);
+	}
+
+	function generatePages() {
+		const pages = [];
+		let count = 0;
+		let page = 1;
+		let i = 0;
+		while (i < allLinks.length) {
+			count++;
+			i++;
+			if (count === 10) {
+				pages.push(page);
+				page++;
+				count = 0;
+			}
+		}
+
+		if (count > 0) {
+			pages.push(page);
+		}
+
+		setPages(pages);
+	}
+
+	useEffect(() => {
+		generatePages();
+	}, [allLinks]);
+
+	const [pagesToRender, setPagesToRender] = useState([]);
+	useEffect(() => {
+		setPagesToRender(pages.slice(0, 5));
+	}, [pages]);
+
+	function movePages(forward = true) {
+		if (!forward && currentPage <= 5) {
+			return;
+		}
+
+		if (forward) {
+			setCurrentPage(pagesToRender[0] + 5);
+			return setPagesToRender(
+				pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)
+			);
+		}
+
+		setCurrentPage(pagesToRender[0] - 5);
+		return setPagesToRender(
+			pages.slice(pagesToRender[0] - 6, pagesToRender[0] - 1)
+		);
+	}
+
+	useEffect(() => {
+		handleLinksToSee(allLinks, currentPage);
+	}, [currentPage]);
+
+	return (
+		<Container>
+			<Title>All of your links</Title>
+			<PageRow>
+                <MovementButton active={pagesToRender[0] <= 5 ? false : true } onClick={() => movePages(false)}>Last 5...</MovementButton>
+				{pagesToRender.map((pageNumber) => (
+					<PageButton
+						selected={pageNumber === currentPage}
+						onClick={() => handlePageClick(pageNumber)}
+					>
+						{pageNumber}
+					</PageButton>
+				))}
+                        <MovementButton active={pagesToRender.length < 5 ? false : true } onClick={() => movePages()}>Next 5...</MovementButton>
+			</PageRow>
+			{linksToUse.map((link) => (
+				<UserLink data={link} />
+			))}
+		</Container>
+	);
 }
