@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserLink from './UserLink.jsx';
 
 const Container = styled.div`
-	margin-top: 50px;
+    margin: 50px 0px 50px 0px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -46,6 +46,7 @@ const PageButton = styled.button`
 `;
 
 const MovementButton = styled.button`
+    display: ${(props) => (props.hidden ? 'none' : 'inherit')}
 	margin: 0px 5px 0px 5px;
 	padding: 5px 10px 5px 10px;
 	background-color: ${(props) => (props.active ? '#fcba03' : '#a3a3a3')};
@@ -159,6 +160,7 @@ export default function AllUserLinks({userData, copyText}) {
 				<MovementButton
 					active={!(pagesToRender[0] <= 5)}
 					onClick={() => movePages(false)}
+                    hidden={pagesToRender.length < 5}
 				>
 					Last 5...
 				</MovementButton>
@@ -173,9 +175,11 @@ export default function AllUserLinks({userData, copyText}) {
 				<MovementButton
 					active={!(pagesToRender.length < 5)}
 					onClick={() => movePages()}
+                    hidden={pagesToRender.length < 5}
 				>
 					Next 5...
 				</MovementButton>
+                    { pagesToRender.length < 5 ? <h1>No URL's shortened</h1> : null }
 			</PageRow>
 			{linksToUse.map((link) => (
 				<UserLink data={link} copyText={copyText} />

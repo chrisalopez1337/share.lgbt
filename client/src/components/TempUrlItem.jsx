@@ -10,6 +10,7 @@ const Row = styled.div`
 	border: 3px solid #f53d7d;
 	border-radius: 7px;
 	min-width: 600px;
+    max-width: 600px;
 	margin: 10px 10px 10px 10px;
 	padding: 0px 10px 0px 10px;
 	transition-duration: 0.2s;

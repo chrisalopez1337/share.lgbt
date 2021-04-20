@@ -35,6 +35,12 @@ export default function TemporaryUrls({
 	userData,
 	setPage
 }) {
+    function formatRedirect(str) {
+        let addition = str.length - 8 > 35 ? '...' : ''; 
+        let temp = str.split('://').slice(1, str.length-1).join().slice(0, 35);
+        temp += addition;
+        return temp;
+    }
 	const linkRender = userData ? (
 		<Link onClick={() => setPage('dashboard')}>See all your saved URL's</Link>
 	) : (
@@ -52,7 +58,7 @@ export default function TemporaryUrls({
 					copyText={copyText}
 					short_link={short_link}
 					clicks={clicks}
-					redirect_link={redirect_link}
+					redirect_link={formatRedirect(redirect_link)}
 				/>
 			))}
 		</Container>
