@@ -179,7 +179,7 @@ export default function AllUserLinks({userData, copyText}) {
 				>
 					Next 5...
 				</MovementButton>
-                    { pagesToRender.length < 5 ? <h1>No URL's shortened</h1> : null }
+                    { pagesToRender.length === 0 ? <h1>No URL's shortened</h1> : null }
 			</PageRow>
 			{linksToUse.map((link) => (
 				<UserLink data={link} copyText={copyText} />

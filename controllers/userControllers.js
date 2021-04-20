@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const userModels = require('../models/userModels.js');
+const linkModels = require('../models/linkModels.js');
 
 // Helper functions
 const getQueryObject = (string) => {
@@ -63,17 +64,33 @@ module.exports = {
 		}
 	},
 
-	addLinkToUser: async (request, res) => {
-		try {
-			const {linkData, userData} = request.body;
-			const {links, username} = userData;
-			const newArray = links;
-			newArray.unshift(linkData);
-			const newUserData = await userModels.addLinkToUser({username}, newArray);
-			res.status(200).send(newUserData);
-		} catch (error) {
-			console.log(error);
-			res.sendStatus(500);
-		}
-	}
+    addLinkToUser: async (req, res) => {
+        try {
+            const {linkId, userData} = req.body;
+            const {links, username} = userData;
+            const newArray = links;
+            newArray.unshift(linkId);
+            const newUserData = await userModels.addLinkToUser({username}, newArray);
+            res.status(200).send(newUserData);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    },
+
+    fetchUsersLinks: async (req, res) => {
+        try {
+            const { linkIds } = req.body;
+            const allLinks = [];
+            for (let i = 0; i < linkIds.length; i++) {
+                const linkId = linkIds[i];
+                const link = await linkModels.getLinkById(linkId);
+                allLinks.unshift(link);
+            }
+            res.status(200).send(allLinks);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    }
 };

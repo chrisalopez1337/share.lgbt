@@ -55,8 +55,15 @@ export default function App() {
 			axios
 				.get(`/api/users/get/${data}`)
 				.then(({data}) => {
-					setUserData(data);
-					setPage('dashboard');
+                            const { links } = data;
+                            axios.post('/api/users/fetch/user-links', { linkIds: links })
+                                .then(res => {
+                                    const userLinks = res.data;
+                                    const userData = {...data, ['links'] : userLinks };
+							        setUserData(userData);
+                                    setPage('dashboard');
+                                })
+                                .catch(console.log);
 				})
 				.catch(console.log);
 		} else {
@@ -111,7 +118,7 @@ export default function App() {
 		axios
 			.post('/api/links/create', {redirect_link})
 			.then(({data}) => {
-				const {short_link, redirect_link, clicks} = data;
+				const {short_link, redirect_link, clicks, _id} = data;
 				// Have to make a dummy link for testing
 				let hash = short_link.split('/');
 				hash = hash[1];
@@ -119,10 +126,17 @@ export default function App() {
 				handleLocalStorage(short_link, redirect_link, clicks);
 				if (userData) {
 					axios
-						.post('/api/users/update/add-link', {linkData: data, userData})
+						.post('/api/users/update/add-link', {linkId: _id, userData})
 						.then(({data}) => {
-							setUserData(data);
-							setShortLink(testLink);
+                            const { links } = data;
+                            axios.post('/api/users/fetch/user-links', { linkIds: links })
+                                .then(res => {
+                                    const userLinks = res.data;
+                                    const userData = {...data, ['links'] : userLinks };
+							        setUserData(userData);
+							        setShortLink(testLink);
+                                })
+                                .catch(console.log);
 						})
 						.catch(console.log);
 				} else {

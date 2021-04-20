@@ -26,5 +26,14 @@ module.exports = {
 		} catch (error) {
 			throw new Error(error);
 		}
-	}
+    },
+
+    getLinkById: async (id) => {
+        try {
+            const link = await Links.findOne({ _id: id });
+            return link;
+        } catch(err) {
+            throw new Error(err);
+        }
+    }
 };
