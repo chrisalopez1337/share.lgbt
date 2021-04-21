@@ -2,15 +2,16 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import {getOne, setOne, deleteOne} from 'local-js';
+import { useLocation, useHistory } from 'react-router-dom';
 import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
 // import ShareModal from './ShareModal.jsx';
-import { useLocation, useHistory } from 'react-router-dom';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Dashboard from './Dashboard.jsx';
 import Redirect from './Redirect.jsx';
+import Mission from './Mission.jsx'; 
 
 const Container = styled.div`
 	display: flex;
@@ -25,7 +26,7 @@ export default function App() {
 	const [shortLink, setShortLink] = useState(null);
 	const [redirect_link, setRedirectLink] = useState('');
 	const [savedLinks, setSavedLinks] = useState([]);
-	const [page, setPage] = useState('home');
+	const [page, setPage] = useState('redirect');
 	const [userData, setUserData] = useState(null);
 
 
@@ -161,7 +162,7 @@ export default function App() {
             setUrl(temp);
             setPage('redirect');
         } else {
-            setPage('home');
+            setPage('mission');
         }
     }, []);
 
@@ -208,6 +209,11 @@ export default function App() {
         ) : page === 'redirect' && url !== null ? (
             <>
                 <Redirect url={url}/>
+            </>
+        ) : page === 'mission' ? (
+            <>
+			    <Header setPage={setPage} userData={userData} logOut={logOut} />
+                <Mission />
             </>
         ) : null;
 	return (
