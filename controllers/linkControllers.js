@@ -88,6 +88,45 @@ module.exports = {
 		}
 	},
 
+    sendToRedirectPage: async (request, res) => {
+        try {
+            const {hash} = request.params;
+            const short_link = `share.lgbt/${hash}`;
+            const data = await models.retrieveLink(short_link);
+
+            if (!data) {
+                return res.status(400).send({
+                    error:
+                        'Request failed, there is no link associated with that short url.'
+                });
+            }
+
+            const {redirect_link, clicks} = data;
+            await models.addClick(short_link, clicks);
+            res.redirect(`http://localhost:1337/?url=${redirect_link}`);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    },
+
+    redirectToLink: async (request, res) => {
+        try {
+            const {url} = request.body;
+            if (typeof url !== 'string' || !url) {
+                return res.status(400).send({
+                    error:
+                        'No URL passed or it was not a String.'
+                });
+            }
+
+            res.redirect(url);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    },
+
 	redirectAndUpdate: async (request, res) => {
 		try {
 			const {hash} = request.params;

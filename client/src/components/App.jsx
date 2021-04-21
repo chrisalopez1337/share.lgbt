@@ -6,10 +6,11 @@ import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
 // import ShareModal from './ShareModal.jsx';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Dashboard from './Dashboard.jsx';
+import Redirect from './Redirect.jsx';
 
 const Container = styled.div`
 	display: flex;
@@ -27,18 +28,11 @@ export default function App() {
 	const [page, setPage] = useState('home');
 	const [userData, setUserData] = useState(null);
 
-    function useQuery() {
-        return new URLSearchParams(useLocation().search);
-    }
-
-    let query = useQuery();
-    console.log(query.get('name'));
 
 	function logIn(data) {
 		setUserData(data);
 		const key = 'current-user';
 		setOne(key, data.username);
-		setPage('dashboard');
 	}
 
 	function logOut() {
@@ -69,7 +63,6 @@ export default function App() {
                                     const userLinks = res.data;
                                     const userData = {...data, ['links'] : userLinks };
 							        setUserData(userData);
-                                    setPage('dashboard');
                                 })
                                 .catch(console.log);
 				})
@@ -154,9 +147,28 @@ export default function App() {
 			.catch(console.log);
 	}
 
+    const location = useLocation();
+    const history = useHistory();
+    const [url, setUrl] = useState(null);
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        let temp = queryParams.get('url');
+        if (temp) {
+            queryParams.delete('url');
+            history.replace({
+                search: queryParams.toString()
+            });
+            setUrl(temp);
+            setPage('redirect');
+        } else {
+            setPage('home');
+        }
+    }, []);
+
 	const pageRender =
 		page === 'home' ? (
 			<>
+			    <Header setPage={setPage} userData={userData} logOut={logOut} />
 				<Converter
 					copyText={copyText}
 					shortLink={shortLink}
@@ -173,14 +185,17 @@ export default function App() {
 			</>
 		) : page === 'signup' ? (
 			<>
+			    <Header setPage={setPage} userData={userData} logOut={logOut} />
 				<SignUp setPage={setPage} />
 			</>
 		) : page === 'login' ? (
 			<>
+			    <Header setPage={setPage} userData={userData} logOut={logOut} />
 				<LogIn setPage={setPage} logIn={logIn} />
 			</>
 		) : page === 'dashboard' ? (
 			<>
+			    <Header setPage={setPage} userData={userData} logOut={logOut} />
 				<Dashboard
 					userData={userData}
 					copyText={copyText}
@@ -190,10 +205,13 @@ export default function App() {
 					redirect_link={redirect_link}
 				/>
 			</>
-		) : null;
+        ) : page === 'redirect' && url !== null ? (
+            <>
+                <Redirect url={url}/>
+            </>
+        ) : null;
 	return (
 		<Container>
-			<Header setPage={setPage} userData={userData} logOut={logOut} />
 			{pageRender}
 		</Container>
 	);
