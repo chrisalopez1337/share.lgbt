@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import {createGlobalStyle} from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -26,8 +27,10 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
 	<>
-		<GlobalStyle />
-		<App />
+        <Router>
+		    <GlobalStyle />
+		    <App />
+        </Router>
 	</>,
 	document.querySelector('#app')
 );

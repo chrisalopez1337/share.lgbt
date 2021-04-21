@@ -85,7 +85,7 @@ module.exports = {
             for (let i = 0; i < linkIds.length; i++) {
                 const linkId = linkIds[i];
                 const link = await linkModels.getLinkById(linkId);
-                allLinks.unshift(link);
+                allLinks.push(link);
             }
             res.status(200).send(allLinks);
         } catch(err) {

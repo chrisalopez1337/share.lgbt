@@ -5,7 +5,8 @@ import {getOne, setOne, deleteOne} from 'local-js';
 import Header from './Header.jsx';
 import Converter from './Converter.jsx';
 import TemporaryUrls from './TemporaryUrls.jsx';
-import ShareModal from './ShareModal.jsx';
+// import ShareModal from './ShareModal.jsx';
+import { useLocation } from 'react-router-dom';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Dashboard from './Dashboard.jsx';
@@ -25,6 +26,13 @@ export default function App() {
 	const [savedLinks, setSavedLinks] = useState([]);
 	const [page, setPage] = useState('home');
 	const [userData, setUserData] = useState(null);
+
+    function useQuery() {
+        return new URLSearchParams(useLocation().search);
+    }
+
+    let query = useQuery();
+    console.log(query.get('name'));
 
 	function logIn(data) {
 		setUserData(data);

@@ -140,9 +140,8 @@ export default function AllUserLinks({userData, copyText}) {
                 pages.slice(pagesToRender[0] - 6, pagesToRender[0] -1 )
             )
         } else {
-            const index = pagesToRender[0] + 5;
-            console.log(pages[index])
-            if (!pages[pagesToRender[0] + 5]) { return };
+            const index = pagesToRender[0] + 4;
+            if (!pages[index]) { return };
             setCurrentPage(pagesToRender[0] + 5);
 			return setPagesToRender(
 				pages.slice(pagesToRender[0] + 4, pagesToRender[4] + 5)
