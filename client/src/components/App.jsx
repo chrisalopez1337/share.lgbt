@@ -46,9 +46,13 @@ export default function App() {
 	function getRecentUrls() {
 		if (!userData) return;
 		const lastFive = userData.links.slice(0, 5);
-		const key = 'stored-urls';
-		setOne(key, lastFive);
-		setSavedLinks(lastFive);
+        axios
+            .post('/api/users/fetch/user-links', { linkIds: lastFive })
+            .then(({data}) => {
+		        const key = 'stored-urls';
+		        setOne(key, data);
+		        setSavedLinks(data);
+            })
 	}
 
     function getUserData(key = 'current-user') {

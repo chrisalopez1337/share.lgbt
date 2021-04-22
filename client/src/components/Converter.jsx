@@ -17,12 +17,33 @@ const Container = styled.form`
     @media (max-width: 725px) {
         width: 450px;
     }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const Title = styled.h1`
 	font-size: 2.75em;
 	padding: 0;
 	margin: 25px 0px 0px 0px;
+    @media (max-width: 725px) {
+        font-size: 2.50em;
+    }
+    @media (max-width: 625px) {
+        font-size: 2.25em;
+    }
+    @media (max-width: 500px) {
+        font-size: 2em;
+    }
+    @media (max-width: 420px) {
+        font-size: 1.75em;
+    }
 `;
 
 const Input = styled.input`
@@ -35,6 +56,18 @@ const Input = styled.input`
 	font-size: 17px;
 	width: 400px;
 	margin-bottom: 20px;
+    @media (max-width: 725px) {
+        width: 350px;
+    }
+    @media (max-width: 650px) {
+        width: 300px;
+    }
+    @media (max-width: 500px) {
+        width: 250px;
+    }
+    @media (max-width: 420px) {
+        width: 200px;
+    }
 `;
 
 const Row = styled.div`
@@ -42,6 +75,9 @@ const Row = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	flex-direction: row;
+    @media (max-width: 420px) {
+        flex-direction: column;
+    }
 `;
 
 const SubmitButton = styled.button`
@@ -104,6 +140,9 @@ const CopyButton = styled.button`
 			${(props) => (props.close ? '#f53d7d' : '#af36f5')};
 		background-color: whitesmoke;
 	}
+    @media (max-width: 420px) {
+        margin: 10px 0px 10px 0px;
+    }
 `;
 
 export default function Converter({
@@ -150,7 +189,7 @@ export default function Converter({
 								setShareRender(false);
 							}}
 						>
-							Close Share
+							Close
 						</CopyButton>
 					) : (
 						<CopyButton

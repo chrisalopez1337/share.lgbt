@@ -17,6 +17,18 @@ const Container = styled.div`
 	border: 2px solid #7830f2;
 	border-radius: 7px;
 	padding: 10px;
+    @media (max-width: 725px) {
+        min-width: 400px;
+        max-width: 400px;
+    }
+    @media (max-width: 500px) {
+        min-width: 300px;
+        max-width: 300px;
+    }
+    @media (max-width: 420px) {
+        min-width: 250px;
+        max-width: 250px;
+    }
 `;
 
 const Link = styled.span`
@@ -64,6 +76,7 @@ export default function UserLink({data, copyText}) {
 	const [shareRender, setShareRender] = useState(false);
 	const [formattedRedirect, setRedirect] = useState(redirect_link);
 	function formatRedirect(string) {
+        if (!string || string.length < 1) return;
 		let x = string
 			.split('://')
 			.slice(1, string.length - 1)
@@ -109,7 +122,6 @@ export default function UserLink({data, copyText}) {
 						Share
 					</Button>
 				)}
-				<Button>Analytics</Button>
 			</ButtonRow>
 			{shareRender ? (
 				<ShareModal url={short_link} display={shareRender} />

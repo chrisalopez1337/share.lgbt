@@ -16,6 +16,15 @@ const Container = styled.div`
     @media (max-width: 725px) {
         width: 450px;
     }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const PageRow = styled.div`
@@ -24,6 +33,9 @@ const PageRow = styled.div`
 	justify-content: center;
 	flex-direction: row;
 	margin-bottom: 25px;
+    @media (max-width: 420px) {
+    flex-direction: column;
+    }
 `;
 
 const Title = styled.h1`

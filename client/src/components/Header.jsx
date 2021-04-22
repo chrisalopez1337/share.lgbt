@@ -68,9 +68,12 @@ const Title = styled.h2`
 	margin-left: auto;
 	margin-right: auto;
 	cursor: pointer;
-	@media (max-width: 500px) {
-		font-size: 4em;
+	@media (max-width: 725px) {
+		font-size: 5em;
 	}
+    @media (max-width: 625px) {
+        font-size: 4em;
+    }
 	@media (max-width: 350px) {
 		font-size: 3em;
 	}
@@ -114,9 +117,13 @@ const NavButton = styled.button`
 					? '#f52c68'
 					: 'transparent'};
 	}
-	@media (max-width: 500px) {
+    @media (max-width: 725px) {
+        font-size: 16px;
+        padding: 9px;
+    }
+	@media (max-width: 625px) {
 		font-size: 16px;
-		padding: 9px;
+		padding: 7px;
 	}
 	@media (max-width: 350px) {
 		font-size: 14px;

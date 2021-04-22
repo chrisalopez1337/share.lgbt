@@ -5,7 +5,7 @@ import ShareModal from './ShareModal.jsx';
 const Row = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-around;
 	flex-direction: row;
 	border: 3px solid #f53d7d;
 	border-radius: 7px;
@@ -23,6 +23,14 @@ const Row = styled.div`
         max-width: 350px;
         flex-direction: column;
     }
+    @media (max-width: 500px) {
+        min-width: 300px;
+        max-width: 300px;
+    }
+    @media (max-width: 420px) {
+        min-width: 250px;
+        max-width: 250px;
+    }
 `;
 
 const Column = styled.div`
@@ -30,7 +38,6 @@ const Column = styled.div`
 	justify-content: flex-start;
 	flex-direction: column;
 	margin: 0px 10px 0px 10px;
-	min-width: 180px;
     @media (max-width: 720px) {
         justify-content: center;
         align-items: center;

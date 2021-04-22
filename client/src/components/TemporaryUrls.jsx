@@ -16,6 +16,15 @@ const Container = styled.div`
     @media (max-width: 720px) {
         width: 450px;
     }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const Link = styled.p`
@@ -39,6 +48,7 @@ export default function TemporaryUrls({
 	setPage
 }) {
     function formatRedirect(str) {
+        if (!str) return;
         let addition = str.length - 8 > 35 ? '...' : ''; 
         let temp = str.split('://').slice(1, str.length-1).join().slice(0, 35);
         temp += addition;

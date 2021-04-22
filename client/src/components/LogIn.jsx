@@ -17,6 +17,15 @@ const Container = styled.form`
     @media (max-width: 725px) {
         width: 425px;
     }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const FormItemContainer = styled.div`

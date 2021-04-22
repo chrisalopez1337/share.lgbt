@@ -16,6 +16,15 @@ const Container = styled.div`
     @media (max-width: 725px) {
         width: 450px;
     }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const Title = styled.h1``;
@@ -25,6 +34,12 @@ const Message = styled.p`
     word-spacing: 2px;
     line-height: 30px;
     font-weight: bold;
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
+    @media (max-width: 450px) {
+        font-size: 16px;
+    }
 `;
 export default function Mission() {
     return (
