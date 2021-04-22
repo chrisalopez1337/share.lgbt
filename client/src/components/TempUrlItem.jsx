@@ -18,6 +18,11 @@ const Row = styled.div`
 		box-shadow: 0px 0px 10px 0px #7830f2;
 		border: 3px solid #7830f2;
 	}
+    @media (max-width: 720px) {
+        min-width: 350px;
+        max-width: 350px;
+        flex-direction: column;
+    }
 `;
 
 const Column = styled.div`
@@ -26,6 +31,10 @@ const Column = styled.div`
 	flex-direction: column;
 	margin: 0px 10px 0px 10px;
 	min-width: 180px;
+    @media (max-width: 720px) {
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const RedirectWrapper = styled.div`
@@ -35,12 +44,19 @@ const RedirectWrapper = styled.div`
 	margin: 0px 10px 0px 10px;
 	min-width: 300px;
 	max-width: 300px;
+    @media (max-width: 720px) {
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const ButtonWrapper = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: column;
+    @media (max-width: 720px) {
+        flex-direction: row;
+    }
 `;
 
 const CopyButton = styled.button`
@@ -52,7 +68,7 @@ const CopyButton = styled.button`
 	font-size: 20px;
 	cursor: pointer;
 	border-radius: 7px;
-	margin: 5px 0px 5px 0px;
+	margin: 5px 5px 5px 5px;
 	transition-duration: 0.2s;
 	font-weight: bold;
 	&:hover {
@@ -61,6 +77,9 @@ const CopyButton = styled.button`
 			${(props) => (props.close ? '#f53d7d' : '#af36f5')};
 		background-color: whitesmoke;
 	}
+    @media(max-width: 720px) {
+        margin: 5px 5px 10px 5px;
+    }
 `;
 
 const Link = styled.h2`

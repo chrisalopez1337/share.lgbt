@@ -157,7 +157,7 @@ export default function Header({setPage, logOut, userData}) {
 			<Title onClick={() => setPage('home')}>share.lgbt</Title>
 			<NavWrapper>
 				{buttonRender}
-				<NavButton support>Our Mission</NavButton>
+                <NavButton support onClick={() => setPage('mission')}>Our Mission</NavButton>
 			</NavWrapper>
 		</Container>
 	);

@@ -14,6 +14,9 @@ const Container = styled.form`
 	border-radius: 7px;
 	box-shadow: 0px 0px 15px 0px #7830f2;
 	width: 600px;
+    @media (max-width: 725px) {
+        width: 450px;
+    }
 `;
 
 const Title = styled.h1`
@@ -108,13 +111,14 @@ export default function Converter({
 	handleShortLink,
 	handleSubmit,
 	redirect_link,
-	copyText
+	copyText,
+    setPage
 }) {
 	const [shareRender, setShareRender] = useState(false);
 	return (
 		<Container onSubmit={handleSubmit}>
 			<Title>Shorten URL</Title>
-			<Info>
+            <Info onClick={() => setPage('mission')}>
 				50% of all revenue is donated to LGBTQ+ foundations. Learn more...
 			</Info>
 			<Row>

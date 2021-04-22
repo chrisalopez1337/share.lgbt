@@ -26,7 +26,7 @@ export default function App() {
 	const [shortLink, setShortLink] = useState(null);
 	const [redirect_link, setRedirectLink] = useState('');
 	const [savedLinks, setSavedLinks] = useState([]);
-	const [page, setPage] = useState('redirect');
+	const [page, setPage] = useState('home');
 	const [userData, setUserData] = useState(null);
 
 
@@ -51,26 +51,26 @@ export default function App() {
 		setSavedLinks(lastFive);
 	}
 
+    function getUserData(key = 'current-user') {
+        const username = getOne(key);
+        if (!username) return setUserData(null);
+        axios
+            .get(`/api/users/get/${username}`)
+            .then(({data}) => {
+                if (!data?.links) return setUserData(null);
+                const { links } = data;
+                axios
+                    .post('/api/users/fetch/user-links', {linkIds: links})
+                    .then(res => {
+                        const userLinks = res.data;
+                        const userData = {...data, ['links']: userLinks};
+                        return setUserData(userData);
+                    });
+            });
+    }
+
 	useEffect(() => {
-		const key = 'current-user';
-		const data = getOne(key);
-		if (data) {
-			axios
-				.get(`/api/users/get/${data}`)
-				.then(({data}) => {
-                            const { links } = data;
-                            axios.post('/api/users/fetch/user-links', { linkIds: links })
-                                .then(res => {
-                                    const userLinks = res.data;
-                                    const userData = {...data, ['links'] : userLinks };
-							        setUserData(userData);
-                                })
-                                .catch(console.log);
-				})
-				.catch(console.log);
-		} else {
-			setUserData(null);
-		}
+        getUserData();
 	}, []);
 
 	useEffect(() => {
@@ -162,7 +162,7 @@ export default function App() {
             setUrl(temp);
             setPage('redirect');
         } else {
-            setPage('mission');
+            setPage('home');
         }
     }, []);
 
@@ -176,6 +176,7 @@ export default function App() {
 					handleShortLink={handleChange}
 					handleSubmit={handleSubmit}
 					redirect_link={redirect_link}
+                    setPage={setPage}
 				/>
 				<TemporaryUrls
 					savedLinks={savedLinks}
@@ -204,6 +205,7 @@ export default function App() {
 					handleShortLink={handleChange}
 					handleSubmit={handleSubmit}
 					redirect_link={redirect_link}
+                    setPage={setPage}
 				/>
 			</>
         ) : page === 'redirect' && url !== null ? (

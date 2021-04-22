@@ -13,6 +13,9 @@ const Container = styled.div`
 	border-radius: 7px;
 	box-shadow: 0px 0px 15px 0px #7830f2;
 	width: 600px;
+    @media (max-width: 725px) {
+        width: 450px;
+    }
 `;
 
 const PageRow = styled.div`

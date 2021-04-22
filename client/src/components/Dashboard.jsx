@@ -9,7 +9,8 @@ export default function Dashboard({
 	copyText,
 	shortLink,
 	handleShortLink,
-	handleSubmit
+	handleSubmit,
+    setPage={setPage}
 }) {
 	return (
 		<>
@@ -19,6 +20,7 @@ export default function Dashboard({
 				handleShortLink={handleShortLink}
 				handleSubmit={handleSubmit}
 				redirect_link={redirect_link}
+                setPage={setPage}
 			/>
 			<AllUserLinks userData={userData} copyText={copyText} />
 		</>

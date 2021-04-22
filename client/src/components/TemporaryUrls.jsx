@@ -13,6 +13,9 @@ const Container = styled.div`
 	border-radius: 7px;
 	box-shadow: 0px 0px 20px 0px #3ae7f0;
 	width: 600px;
+    @media (max-width: 720px) {
+        width: 450px;
+    }
 `;
 
 const Link = styled.p`
