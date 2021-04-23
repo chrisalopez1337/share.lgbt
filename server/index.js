@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const PORT = 1337;
+const PORT = 3000;
 const bodyParser = require('body-parser');
 const path = require('path');
 const linkRouter = require('./linkRoutes.js');
@@ -23,4 +23,4 @@ app.use('/api/users', userRouter);
 app.get('/:hash', sendToRedirectPage);
 
 
-app.listen(PORT, () => console.log(`App listening @ localhost:${PORT}`));
+app.listen(PORT, () => console.log(`App running on ${PORT}`));

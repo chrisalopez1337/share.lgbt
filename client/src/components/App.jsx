@@ -125,10 +125,6 @@ export default function App() {
 			.post('/api/links/create', {redirect_link})
 			.then(({data}) => {
 				const {short_link, redirect_link, clicks, _id} = data;
-				// Have to make a dummy link for testing
-				let hash = short_link.split('/');
-				hash = hash[1];
-				const testLink = `localhost:1337/${hash}`;
 				handleLocalStorage(short_link, redirect_link, clicks);
 				if (userData) {
 					axios
@@ -140,13 +136,13 @@ export default function App() {
                                     const userLinks = res.data;
                                     const userData = {...data, ['links'] : userLinks };
 							        setUserData(userData);
-							        setShortLink(testLink);
+							        setShortLink(short_link);
                                 })
                                 .catch(console.log);
 						})
 						.catch(console.log);
 				} else {
-					setShortLink(testLink);
+					setShortLink(short_link);
 				}
 			})
 			.catch(console.log);

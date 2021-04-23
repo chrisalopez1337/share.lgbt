@@ -4,10 +4,12 @@ WORKDIR /usr/src/app
 
 COPY package.json .
 
-RUN npm install --production
+RUN apk add --no-cache make gcc g++ python && \
+  npm install && \
+  apk del make gcc g++ python
 
 COPY . .
 
-EXPOSE 1337
+EXPOSE 3000
 
 CMD [ "npm", "start" ]

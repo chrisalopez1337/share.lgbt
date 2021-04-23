@@ -103,7 +103,7 @@ module.exports = {
 
             const {redirect_link, clicks} = data;
             await models.addClick(short_link, clicks);
-            res.redirect(`http://localhost:1337/?url=${redirect_link}`);
+            res.redirect(`http://share.lgbt/?url=${redirect_link}`);
         } catch(err) {
             console.log(err);
             res.sendStatus(500);

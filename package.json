@@ -19,6 +19,7 @@
     "local-js": "^0.0.6",
     "mongoose": "^5.12.4",
     "node-gyp": "^7.1.2",
+    "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
