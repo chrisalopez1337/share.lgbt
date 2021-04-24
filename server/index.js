@@ -8,27 +8,26 @@ const linkRouter = require('./linkRoutes.js');
 const userRouter = require('./userRoutes.js');
 const fs = require('fs');
 const https = require('https');
+const http = require('http');
 
-// HTTPS
-const key = fs.readFileSync(__dirname + '../selfsigned.key');
-const cert = fs.readFileSync(__dirname + '../selfsigned.crt');
-const options = { key, cert };
-const server = https.createServer(options, app);
 // Redirect controller
 const {sendToRedirectPage} = require('../controllers/linkControllers.js');
-server.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-server.use('/', express.static(path.join(__dirname, '../client/dist')));
+app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
-server.use('/api/links', linkRouter);
-server.use('/api/users', userRouter);
-server.get('/:hash', sendToRedirectPage);
+app.use('/api/links', linkRouter);
+app.use('/api/users', userRouter);
+app.get('/:hash', sendToRedirectPage);
 
+// HTTPS + HTTP
+const key = fs.readFileSync(__dirname + '/selfsigned.key');
+const cert = fs.readFileSync(__dirname + '/selfsigned.crt');
+const options = { key, cert };
+const HttpsServer = https.createServer(options, app);
+const HttpServer = http.createServer(app);
 
-server.listen(PORT, () => console.log(`App running on ${PORT}`));
+HttpServer.listen(80, () => console.log(`HTTP SERVER RUNNING ON PORT --> 80`));
+HttpsServer.listen(443, () => console.log(`HTTPS SERVER RUNNING ON PORT --> 443`));
