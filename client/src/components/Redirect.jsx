@@ -133,7 +133,7 @@ const Seconds = styled.p`
 
 
 export default function Redirect({ url }) {
-    const [seconds, setSeconds] = useState(7);
+    const [seconds, setSeconds] = useState(5);
     function removeOne() { setSeconds(seconds-1) };
     useEffect(() => {
         if (seconds > 0) {
@@ -141,19 +141,35 @@ export default function Redirect({ url }) {
         }
     }, [seconds]);
     setTimeout(() => {
-      window.location.href = url;
-    }, 7000);
+       window.location.href = url;
+    }, 5000);
     return (
         <Container>
             <HeaderWrapper>
-                <Title onClick={() => window.open('http://localhost:1337')}>Share.lgbt</Title>
+                <Title onClick={() => window.open('https://share.lgbt')}>Share.lgbt</Title>
                 <h2>You will be redirected soon</h2>
                 <Seconds>{seconds} seconds...</Seconds>
             </HeaderWrapper>
 
-            <AdWrapper>
-                <p>Ads By Google</p>
-            </AdWrapper>
+                <Helmet>
+                    <script src="https://phortaub.com/pfe/current/tag.min.js?z=4192375" data-cfasync="false" async></script>
+                        <script type="text/javascript">
+amzn_assoc_placement = "adunit0";
+amzn_assoc_tracking_id = "share0f5-20";
+amzn_assoc_ad_mode = "search";
+amzn_assoc_ad_type = "smart";
+amzn_assoc_marketplace = "amazon";
+amzn_assoc_region = "US";
+amzn_assoc_default_search_phrase = "apple";
+amzn_assoc_default_category = "All";
+amzn_assoc_linkid = "792200ce669971d6e0939e31d610c115";
+amzn_assoc_search_bar = "true";
+amzn_assoc_title = "Shop Related Products";
+amzn_assoc_search_bar_position = "bottom";
+</script>
+<script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+    <div id="amzn-assoc-ad-c2ecc7f9-9115-4cbd-ae2b-9a2df3c103a4"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=c2ecc7f9-9115-4cbd-ae2b-9a2df3c103a4"></script>
+                </Helmet>
         </Container>
     );
 }
