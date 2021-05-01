@@ -68,7 +68,7 @@ export default function Mission() {
         <Container>
             <Title>Mission</Title>
             <Message>
-                Our mission with this application is simple. As the world moves more and more to the web, we also share more and more links. So why not do something productive with them? When you use our tool to shorten a link and it’s opened, the user will be sent to a brief redirect page with an advertisement. The revenue generated through this will be donated directly to a LGBTQA+ foundation in need of resources. You can also purchase a premium account for $1/month to receive links without any ad redirects and still support our cause! Waiting a few seconds to get to your next meme or article might be a minor inconvenience, but it can play a small part in helping change our world for the better. If you choose to help us in that change, thank you!
+                Our mission with this application is simple. As the world moves more and more to the web, we also share more and more links. So why not do something productive with them? When you use our tool to shorten a link and it’s opened, the user will be sent to a brief redirect page with an advertisement. The revenue generated through this will be donated directly to a LGBTQA+ foundation in need of resources. (Feel free to donate directly below!) Waiting a few seconds to get to your next meme or article might be a minor inconvenience, but it can play a small part in helping change our world for the better. If you choose to help us in that change, thank you!
             </Message>
         </Container>
 
