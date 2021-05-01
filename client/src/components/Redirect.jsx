@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {Helmet} from 'react-helmet';
 
 const Container = styled.div`
     display: flex;
@@ -19,10 +20,23 @@ const HeaderWrapper = styled.div`
     border-radius: 7px;
     box-shadow: 0px 0px 15px 0px #7830f2;
     width: 600px;
+    @media (max-width: 725px) {
+        width: 450px;
+    }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const AdWrapper = styled.div`
     margin-top: 50px;
+    marin-bottom: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,6 +47,18 @@ const AdWrapper = styled.div`
     box-shadow: 0px 0px 15px 0px #7830f2;
     width: 600px;
     height: 600px;
+    @media (max-width: 725px) {
+        width: 450px;
+    }
+    @media (max-width: 625px) {
+        width: 350px;
+    }
+    @media (max-width: 500px) {
+        width: 290px;
+    }
+    @media (max-width: 420px) {
+        width: 230px;
+    }
 `;
 
 const Title = styled.h2`
@@ -105,6 +131,7 @@ const Seconds = styled.p`
 `;
 
 
+
 export default function Redirect({ url }) {
     const [seconds, setSeconds] = useState(7);
     function removeOne() { setSeconds(seconds-1) };
@@ -125,7 +152,7 @@ export default function Redirect({ url }) {
             </HeaderWrapper>
 
             <AdWrapper>
-                <h1>Advertisement Here</h1>    
+                <p>Ads By Google</p>
             </AdWrapper>
         </Container>
     );

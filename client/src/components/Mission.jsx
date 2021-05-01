@@ -41,13 +41,45 @@ const Message = styled.p`
         font-size: 16px;
     }
 `;
+
+const Li = styled.li`
+    font-size: 20px;
+    word-spacing: 2px;
+    line-height: 30px;
+    font-weight: bold;
+    @media (max-width: 600px) {
+        font-size: 18px;
+    }
+    @media (max-width: 450px) {
+        font-size: 16px;
+    }
+`;
+
+const Link = styled.a`
+    text-decoration: underline;
+    text-decoration-color: #7830f2
+    color: #7830f2;
+    cursor: pointer;
+`;
+
 export default function Mission() {
     return (
+        <>
         <Container>
             <Title>Mission</Title>
             <Message>
-                Our mission with this application is simple. As the world moves more and more to the web, we also share more and more links. So why not do something productive with them? When you shorten a link and its opened, a user is directed to a short redirect page with an advertisment. The revenue generated through this is directly donated to a LGBTQA+ foundation in need of resources. (List of them here if you want to make direct donations) You can also purchase a premium account for $1/month to recieve links without any ad redirects and still support our cause! By no means is waiting a few seconds to get to your next meme or article convient, but it can play a small part in changing our world today. If you choose to help us in that change, thank you!
+                Our mission with this application is simple. As the world moves more and more to the web, we also share more and more links. So why not do something productive with them? When you use our tool to shorten a link and it’s opened, the user will be sent to a brief redirect page with an advertisement. The revenue generated through this will be donated directly to a LGBTQA+ foundation in need of resources. You can also purchase a premium account for $1/month to receive links without any ad redirects and still support our cause! Waiting a few seconds to get to your next meme or article might be a minor inconvenience, but it can play a small part in helping change our world for the better. If you choose to help us in that change, thank you!
             </Message>
         </Container>
+
+        <Container>
+            <Title>Foundations</Title>
+            <ul>
+                <Li>LGBTQ Victory Fund: <Link href="https://www.victoryfund.org/">victoryfund.org</Link></Li>
+                    <Li>Equality Federation: <Link href="https://equalityfederation.org/">equalityfederation.org</Link></Li>
+                        <Li>Trans Lifeline: <Link href="https://translifeline.org/">translifeline.org</Link></Li>
+            </ul>
+        </Container>
+        </>
     );
 }

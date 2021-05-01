@@ -66,14 +66,14 @@ export default function TemporaryUrls({
 			<h1>Your Recent URL's</h1>
 			{linkRender}
 			{savedLinks.length === 0 ? <h3>No Recent URL's shortened</h3> : null}
-			{savedLinks.map(({short_link, clicks, redirect_link}) => (
+			{savedLinks[0]?.short_link ? savedLinks.map(({short_link, clicks, redirect_link}) => (
 				<TempUrlItem
 					copyText={copyText}
 					short_link={short_link}
 					clicks={clicks}
 					redirect_link={formatRedirect(redirect_link)}
 				/>
-			))}
+			)) : null}
 		</Container>
 	);
 }

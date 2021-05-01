@@ -1,6 +1,8 @@
+const { username, password } = require('../config/mongo.js');
 const mongoose = require('mongoose');
+const options = { user: username, pass: password };
 
-mongoose.connect('mongodb://172.17.0.2/share-lgbt');
+mongoose.connect('mongodb://18.207.152.137/share-lgbt', options);
 
 const linkSchema = new mongoose.Schema({
 	redirect_link: String,
